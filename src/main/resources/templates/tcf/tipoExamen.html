@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+
+	<header th:replace="layout/layout :: header"></header>
+
+	<main class="container py-4">
+
+	<div class="card bg-dark text-white">
+		<div class="card-header" th:text="${titulo}"></div>
+		<div class="card-body">
+
+			<td><a class="btn btn-primary btn-xs"
+				th:href="@{tipoExamen/3}" th:text="'Menores de 40 años'"></a>
+			<td><a class="btn btn-primary btn-xs"
+				th:href="@{tipoExamen/4}" th:text="'Mayores de 40 años'"></a>
+			<td><a class="btn btn-primary btn-xs"
+				th:href="@{tipoExamen/1}" th:text="'Menores de 35 años'"></a>
+			<td><a class="btn btn-primary btn-xs"
+				th:href="@{tipoExamen/2}" th:text="'Mayores de 35 años'"></a>
+			<td><a class="btn btn-primary btn-xs"
+				th:href="@{tipoExamen/5}" th:text="'Fuerzas Especiales'"></a>
+		</div>
+	</div>
+	</main>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

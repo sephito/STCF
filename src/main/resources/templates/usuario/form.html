@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+
+	<header th:replace="layout/layout :: header"></header>
+
+	<main class="container py-4">
+
+		<div class="card bg-dark text-white">
+			<div class="card-header" th:text="${titulo}"></div>
+			<div class="card-body">
+				<h4 class="card-title">
+					<a class="btn btn-light btn-xs"
+						th:href="@{'/configuracion/usuario/listar'}"
+						th:text="'&laquo; volver'"></a>
+				</h4>
+				<div th:object="${usuario}" th:remove="tag">
+					<ul th:if="${#fields.hasErrors('*')}" class="alert alert-danger"
+						role="alert">
+						<li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>
+					</ul>
+				</div>
+
+				<form th:action="@{/configuracion/usuario/form}"
+					th:object="${usuario}" method="post">
+					<div class="form-group row">
+						<label for="vusuarioNom" class="col-sm-2 col-form-label">Usuario</label>
+						<div class="col-sm-6">
+							<input type="text" th:field="*{vusuarioNom}" class="form-control"
+								th:errorclass="'form-control alert-danger'" /> <small
+								class="form-text text-danger"
+								th:if="${#fields.hasErrors('vusuarioNom')}"
+								th:errors="*{vusuarioNom}"></small>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="vpasswordCod" class="col-sm-2 col-form-label">Password</label>
+						<div class="col-sm-6">
+							<input type="text" th:field="*{vpasswordCod}"
+								class="form-control" th:errorclass="'form-control alert-danger'" />
+							<small class="form-text text-danger"
+								th:if="${#fields.hasErrors('vpasswordCod')}"
+								th:errors="*{vpasswordCod}"></small>
+						</div>
+					</div>
+		<!-- 
+		<div class="form-group row">
+		   <label for="crolTipo" class="col-sm-2 col-form-label">Rol</label>
+		   <div class="col-sm-6">
+		      <select th:field="*{crolTipo}" class="form-control" th:errorclass="'form-control alert-danger'">
+		         <option value="ROL_USUARIO">ROL_USUARIO</option>
+		         <option value="ROL_CONSULTOR">ROL_CONSULTOR</option>
+		         <option value="ROL_EVALUADOR">ROL_EVALUADOR</option>
+		         <option value="ROL_ADMIN">ROL_ADMIN</option>
+		      </select>
+		      <small
+		         class="form-text text-danger"
+		         th:if="${#fields.hasErrors('crolTipo')}"
+		         th:errors="*{crolTipo}"></small>
+		   </div>
+		</div>
+ -->
+
+
+		<div class="form-group row">
+		   <label for="cestadoVal" class="col-sm-2 col-form-label">Estado</label>
+		   <div class="col-sm-6">
+		      <select th:field="*{cestadoVal}" class="form-control" th:errorclass="'form-control alert-danger'">
+		         <option value="1">Activo</option>
+		         <option value="0">Cesado</option>
+		      </select>
+		      <small
+		         class="form-text text-danger"
+		         th:if="${#fields.hasErrors('cestadoVal')}"
+		         th:errors="*{cestadoVal}"></small>
+		   </div>
+		</div>
+
+
+
+					<div class="form-group row">
+						<div class="col-sm-6">
+							<input type="submit" th:value="${titulo}"
+								class="btn btn-secondary" />
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</main>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

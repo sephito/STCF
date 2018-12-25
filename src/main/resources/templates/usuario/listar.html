@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+
+	<header th:replace="layout/layout :: header"></header>
+
+	<main class="container py-4">
+
+	<div class="card bg-light">
+		<div class="card-header" th:text="${titulo}"></div>
+		<div class="card-body">
+
+			<h4 class="card-title">
+				<a th:href="@{/configuracion/usuario/form}"
+					class="btn btn-primary btn-xs">Crear usuario</a> <a
+					th:href="@{/configuracion/usuario/impMilitares}"
+					class="btn btn-primary btn-xs">Importar Militares</a> <a
+					th:href="@{/configuracion/usuario/ver}"
+					class="btn btn-primary btn-xs">Ver Unidades</a>
+			</h4>
+			<table class="table table-striped table-bordered text-center">
+				<thead class="thead-inverse">
+					<tr>
+						<th>Fila</th>
+						<th>Nombre Completo</th>
+						<th>Usuario</th>
+						<th>Estado</th>
+						<th>Opciones</th>
+
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="usuario,iter: ${usuarios}">
+						<td th:text="${iter.index}+1"></td>
+						<td
+							th:text="${usuario.vpersonaApetpat} + ' ' + ${usuario.vpersonaApetmat}+ ',' +${usuario.vpersonaNomre}"></td>
+						<td th:text="${usuario.vusuarioNom}"></td>
+
+
+						<td th:if="${usuario.cestadoVal == '0'}" th:text="'Cesado'">
+						</td>
+						<td th:if="${usuario.cestadoVal == '1'}" th:text="'Activo'">
+						</td>
+
+
+
+						<td><a class="btn btn-primary btn-xs"
+							th:href="@{form/} + ${usuario.id}" th:text="'editar'"></a> <a
+							class="btn btn-danger btn-xs"
+							th:href="@{eliminar/} + ${usuario.id}" th:text="'eliminar'"
+							onclick="return confirm('Estas seguro que quieres eliminar?');"></a></td>
+					</tr>
+				</tbody>
+
+			</table>
+			<nav th:replace="paginator-nav :: paginator"></nav>
+		</div>
+	</div>
+
+
+
+
+	</main>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

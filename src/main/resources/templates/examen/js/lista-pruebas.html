@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<script type="text/javascript" th:fragment="javascript">
+
+$(document).ready(function(){
+	source: function(request,response){
+
+		$.ajax({
+			url:"/examen/listar-pruebas/",
+			dataType:"json",
+			data:{
+				term:request.term
+			},
+			success:function(data){
+				response($.map(data,function(item){
+					return {
+						value:item.id,
+						label:item.vnombreCom,
+					}
+				}))
+			}
+			
+		})
+	}
+})
+
+
+
+
+</script>
+
+</body>
+</html>

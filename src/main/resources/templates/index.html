@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+
+	<header th:replace="layout/layout :: header"></header>
+
+ <main  style="height:80vh;"> 
+            <div class="container-fluid pt-5 pb-5" sec:authorize="!isAuthenticated()">
+                <div class="row">
+                    <div class="col-3 text-center">
+                            
+                            <img th:src="@{/images/coede2.jpg}" alt="CINFE logo" style="width:60%" />
+                    </div>
+                    <div class="col-6">
+                        <div class="row">
+                            <div class="col-12 text-center" style="color: white">
+                                    
+                                    <br>
+                            </div>
+                            <div class="col-12">
+
+                                    <div class="jumbotron">
+                                            <h3 class="display-5">BIENVENIDOS!</h3>
+                                            <p class="lead">Bievenidos al Sistema de Test de Capacidad Fisica del Ejército.</p>
+                                            <hr class="my-4">
+                                            <p>Para acceder al sistema, usted deberá contar con un Usuario y Contraseña, sino lo dispone deberá solicitar sus datos al Correo Chasqui.</p>
+                                            <a class="btn btn-success btn-lg" href="#" role="button">Solicitar</a>
+                                          </div>
+
+                              
+                            </div>
+                        </div>
+                    
+                    </div>
+                    <div class="col-3 text-center">
+						<img th:src="@{/images/logoeje.png}" alt="CINFE logo" style="width:60%" />
+                        </div>
+
+                </div>
+            </div>
+        </main>
+
+
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+
+	<header th:replace="layout/layout :: header"></header>
+
+	<main class="container py-4">
+
+		<div class="card bg-dark text-white">
+			<div class="card-header" th:text="${titulo}"></div>
+			<div class="card-body">
+
+	
+
+				<form th:action="@{/evaluar/oficiales/periodo}"
+					th:object="${periodo}" method="post">
+
+			<div class="form-group row">
+						<label for="codigo" class="col-sm-2 col-form-label">Seleccione Codigo</label>
+						<div class="col-sm-6">
+							<select th:field="*{codigo}" class="form-control"
+								th:errorclass="'form-control alert-danger'">
+								<option value="">--</option>
+								<option th:each="periodo : ${periodos}" th:value="${periodo.cperiodoCod}"
+									th:utext="${periodo.cperiodoCod}" />
+							</select> <small class="form-text text-danger"
+								th:if="${#fields.hasErrors('codigo')}" th:errors="*{codigo}"></small>
+						</div>
+					</div>					
+					
+
+					<div class="form-group row">
+						<div class="col-sm-6">
+							<input type="submit" th:value="${titulo}"
+								class="btn btn-secondary" />
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</main>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

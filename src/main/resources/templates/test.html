@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+
+	<header th:replace="layout/layout2 :: header"></header>
+
+ <main style="height:80vh;"> 
+            <div class="container-fluid pt-5 pb-5">
+                <div class="row">
+                    <div class="col-3 text-center">
+                            
+                            <img th:src="@{/images/ECOME13.png}" alt="CINFE logo" style="width:300px;" />
+                    </div>
+                    <div class="col-9">
+                        <div class="row">
+                            <div class="col-12 text-center" style="color: white">
+                                    
+                                    <br>
+                            </div>
+                            <div class="col-12">
+
+                                    <div class="jumbotron">
+                                            <h3 class="display-5">BIENVENIDOS!</h3>
+                                            <p class="lead">Bievenidos al Sistema de Trámite Documentario de la ECOME</p>
+                                            <hr class="my-4">
+                                            <p>Para acceder al sistema, usted deberá contar con un Usuario y Contraseña, sino lo dispone deberá solicitar sus datos al Administrador (fletcherodriguez8@hotmail.com).</p>
+                                            <a class="btn btn-primary btn-lg" href="#" role="button">Solicitar</a>
+                                          </div>
+
+                              
+                            </div>
+                        </div>
+                    
+                    </div>
+
+                </div>
+            </div>
+        </main>
+
+
+	<footer th:replace="layout/layout2 :: footer"></footer>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+
+	<header th:replace="layout/layout :: header"></header>
+
+	<main class="container py-4">
+
+		<div class="card bg-light">
+			<div class="card-header" th:text="${titulo}"></div>
+			<div class="card-body">
+
+				<h4 class="card-title">
+					<a class="btn btn-light btn-xs"
+						th:href="@{'/configuracion/usuario/ver'}"
+						th:text="'&laquo; volver'"></a>
+
+					<form th:action="@{/configuracion/usuario/insTcfdet}"
+						th:object="${usuper}" method="post">
+						<input class="btn btn-primary btn-xs" type="submit"
+							value="Generar examenes" />
+					</form>
+
+
+				</h4>
+				<table class="table table-striped table-bordered text-center">
+					<thead class="thead-inverse">
+						<tr>
+							<th>Fila</th>
+							<th>Grado</th>
+							<th>Arma</th>
+							<th>Apellido Paterno</th>
+							<th>Apellido Materno</th>
+							<th>Apellido Nombre</th>
+							<th>Edad</th>
+							<th>Tipo de Examen</th>
+							<th>Rol</th>
+
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="tcf,iter : ${tcfs}">
+							<td th:text="${iter.index}+1"></td>
+							<td th:text="${tcf.cgradoDesccort}"></td>
+							<td th:text="${tcf.varmasDesccort}"></td>
+							<td th:text="${tcf.usuario.vpersonaApetpat}"></td>
+							<td th:text="${tcf.usuario.vpersonaApetmat}"></td>
+							<td th:text="${tcf.usuario.	vpersonaNomre}"></td>
+							<td th:text="${tcf.nedadNum}"></td>
+							<td th:text="${tcf.tipoExamen.vnombreCom}"></td>
+							<td th:text="${tcf.usuario.id}"></td>
+
+
+
+
+
+
+
+
+
+
+						</tr>
+					</tbody>
+
+				</table>
+
+			</div>
+		</div>
+
+
+	</main>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

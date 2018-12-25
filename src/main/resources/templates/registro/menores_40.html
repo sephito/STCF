@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+
+	<header th:replace="layout/layout :: header"></header>
+
+
+	<main class="container-fluid">
+
+	<div *ngIf="(historial_valido).length===0" class="alert alert-info"
+		role="alert">
+		<strong>No hay </strong>personal Masculino - {{titulo}}
+	</div>
+	<div class="row" *ngIf="(historial_valido).length!=0">
+		<div class="col-4"></div>
+		<div class="col-4 text-center">
+			<button class="btn btn-primary" (click)="guardar()">
+				<i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar Datos
+			</button>
+		</div>
+		<div class="col-4"></div>
+		<br> <br>
+	</div>
+	<!-- Example DataTables Card-->
+	<div class="card mb-3" *ngIf="(historial_valido).length!=0">
+		<div class="card-header">
+			<i class="fa fa-edit fa-fw"></i> Evaluación
+		</div>
+		<div class="card-body">
+			<!-- <div class="pre-scrollable card-body" style="max-height: 75vh"> -->
+			<div class="pagina">
+				<br>
+				<div class="container-fluid ">
+					<div class="row">
+						<div class="col col-2 text-center">
+							<div class="row">
+								<div class="col col-2">N/O</div>
+								<div class="col col-3">Grado Arma</div>
+								<div class="col col-7">Apellidos y Nombres</div>
+							</div>
+						</div>
+						<div class="col col-1 text-center">
+							<div class="row">
+								<div class="col col-4">EDAD</div>
+								<div class="col col-4">PESO</div>
+								<div class="col col-4">TALLA</div>
+							</div>
+						</div>
+						<div class="col col-7">
+							<div class="row">
+								<div class="col col-6 text-center">Primer día</div>
+								<div class="col col-6 text-center">Segundo día</div>
+								<div class="col col-2 text-center">Barras</div>
+								<div class="col col-2 text-center">Abdominales</div>
+								<div class="col col-2 text-center">Carrera 2,400 mt</div>
+								<div class="col col-3 text-center">Pista de Combate</div>
+								<div class="col col-3 text-center">Natación: 50mts</div>
+								<div class="col col-2 text-center">COEF 2</div>
+								<div class="col col-2 text-center">COEF 1</div>
+								<div class="col col-2 text-center">COEF 2</div>
+								<div class="col col-3 text-center">COEF 3</div>
+								<div class="col col-3 text-center">COEF 2</div>
+								<div class="col col-2 text-center">
+									<div class="row">
+										<div class="col col-4">Rep</div>
+										<div class="col col-4">Nota</div>
+										<div class="col col-4">Ptos</div>
+									</div>
+								</div>
+								<div class="col col-2 text-center">
+									<div class="row">
+										<div class="col col-4">Rep</div>
+										<div class="col col-4">Nota</div>
+										<div class="col col-4">Ptos</div>
+									</div>
+								</div>
+								<div class="col col-2 text-center">
+									<div class="row">
+										<div class="col col-6">Tiempo (MM:SS)</div>
+										<div class="col col-3">Nota</div>
+										<div class="col col-3">Ptos</div>
+									</div>
+								</div>
+								<div class="col col-3 text-center">
+									<div class="row">
+										<div class="col">Tiempo (MM:SS)</div>
+										<div class="col">Nota</div>
+										<div class="col">Ptos</div>
+									</div>
+								</div>
+								<div class="col col-3 text-center">
+									<div class="row">
+										<div class="col">Tiempo (MM:SS)</div>
+										<div class="col">Nota</div>
+										<div class="col">Ptos</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col col-1">
+							<div class="row">
+								<div class="col col-12">PUNTAJE</div>
+								<div class="col col-6">Total</div>
+								<div class="col col-6">Prom(#)</div>
+							</div>
+						</div>
+						<div class="col col-1">
+							<div class="row">
+								<div class="col col-12">RESULTADO</div>
+							</div>
+						</div>
+						<!-- <div class="col col-1">RESULTADO</div>       -->
+					</div>
+				</div>
+				<div class="container-fluid" th:each="registro,iter : ${tcfydets}">
+
+					<div class="row">
+						<div class="col col-2 text-center">
+							<div class="row">
+								<div class="col col-2" th:text="${iter.index}+1"></div>
+								<div class="col col-3"
+									th:text="${registro.grado} + ' ' + ${registro.arma}"></div>
+								<div class="col col-7" th:text="${registro.nombre}"></div>
+							</div>
+						</div>
+
+
+
+						<div th:if="${registro.observacion} ==' '"
+							class="col col-1 text-center">
+							<div class="row">
+
+								<div class="col col-4" th:text="${registro.edad}"></div>
+								<div class="col col-4">
+									<input class="form-control" type="text"
+										th:value="${registro.peso}">
+								</div>
+								<div class="col col-4">
+									<input class="form-control" type="text"
+										th:value="${registro.talla}">
+								</div>
+							</div>
+						</div>
+						<div th:if="${registro.observacion} !=' '"
+							class="col col-1 text-center"></div>
+						<div th:if="${registro.observacion}==' '" class="col col-7">
+							<div class="row">
+								<div class="col col-2 text-center">
+									<div class="row">
+										<div class="col col-4">
+											<select th:value="${registro.ejercicioi_rep}"
+												th:id="'repeticion'+${iter.index}+'_i'"																								
+												th:onchange="'itemsHelper.calcularImporte('+${iter.index}+',\'i\',\''+${registro.sexo}+'\','+${registro.edad}+',\''+${registro.procedencia}+'\', this.value);'"
+												class="form-control">
+												<option th:each="item : ${list}" th:value="${item.valor}"
+													th:utext="${item.texto}" /></option>
+											</select>
+
+										</div>
+										<div th:id="'nota'+${iter.index}+'_i'" class="col col-4" th:text="${registro.ejercicioi_not}"></div>
+										<div class="col col-4" th:text="${registro.ejercicioi_ptos}"></div>
+									</div>
+								</div>
+								<div class="col col-2 text-center">
+									<div class="row">
+										<div class="col col-4">
+											<select th:value="${registro.ejerciciov_rep}"
+												class="form-control">
+												<option th:each="item : ${listii}" th:value="${item.valor}"
+													th:utext="${item.texto}" /></option>
+											</select>
+
+										</div>
+										<div class="col col-4" th:text="${registro.ejerciciov_not}"></div>
+										<div class="col col-4" th:text="${registro.ejerciciov_ptos}"></div>
+									</div>
+								</div>
+								<div class="col col-2 text-center">
+									<div class="row">
+										<div class="col col-6">
+											<div class="row">
+												<div class="col-6">
+													<select th:value="${registro.ejerciciovi_rep_min}"
+														class="form-control">
+														<option th:each="item : ${list_min}"
+															th:value="${item.valor}" th:utext="${item.texto}" /></option>
+													</select>
+												</div>
+												<div class="col-6">
+													<select th:value="${registro.ejerciciovi_rep_sec}"
+														class="form-control">
+														<option th:each="item : ${list_sec}"
+															th:value="${item.valor}" th:utext="${item.texto}" /></option>
+													</select>
+												</div>
+
+											</div>
+										</div>
+										<div class="col col-3" th:text="${registro.ejerciciovi_not}"></div>
+										<div class="col col-3" th:text="${registro.ejerciciovi_ptos}"></div>
+									</div>
+								</div>
+								<div class="col col-3 text-center">
+									<div class="row">
+										<div class="col">
+											<div class="row">
+												<div
+													th:if="${(registro.arma=='PEF' and registro.procedencia=='1') or registro.procedencia=='0'}"
+													class="col-6">
+													<select th:value="${registro.ejercicioviii_rep_min}"
+														class="form-control">
+														<option th:each="item : ${list_min}"
+															th:value="${item.valor}" th:utext="${item.texto}" /></option>
+													</select>
+
+												</div>
+												<div
+													th:if="${(registro.arma=='PEF' and registro.procedencia=='1') or registro.procedencia=='0'}"
+													class="col-6">
+													<select th:value="${registro.ejercicioviii_rep_sec}"
+														class="form-control">
+														<option th:each="item : ${list_sec}"
+															th:value="${item.valor}" th:utext="${item.texto}" /></option>
+													</select>
+
+												</div>
+												<div
+													th:if="${registro.arma!='PEF' and registro.procedencia=='1'}"
+													class="col-12">------------</div>
+											</div>
+										</div>
+										<div class="col" th:text="${registro.ejercicioviii_not}"></div>
+										<div class="col" th:text="${registro.ejercicioviii_ptos}"></div>
+									</div>
+								</div>
+								<div class="col col-3 text-center table-hover">
+									<div class="row table-hover">
+										<div class="col table-hover">
+											<div class="row table-hover">
+												<div class="col-6">
+													<select th:value="${registro.ejercicioix_rep_min}"
+														class="form-control">
+														<option th:each="item : ${list_min}"
+															th:value="${item.valor}" th:utext="${item.texto}" /></option>
+													</select>
+
+												</div>
+												<div class="col-6">
+													<select th:value="${registro.ejercicioix_rep_sec}"
+														class="form-control">
+														<option th:each="item : ${list_sec}"
+															th:value="${item.valor}" th:utext="${item.texto}" /></option>
+													</select>
+
+												</div>
+											</div>
+										</div>
+										<div class="col" th:text="${registro.ejercicioix_not}"></div>
+										<div class="col" th:text="${registro.ejercicioix_ptos}"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div th:if="${registro.observacion} !=' '" class="col col-7"
+							th:text="${registro.observacion}"></div>
+						<div th:if="${registro.observacion} ==' '" class="col col-1">
+							<div class="row">
+								<div class="col col-6" th:text="${registro.total}"></div>
+								<div class="col col-6" th:text="${registro.promedio}"></div>
+
+							</div>
+						</div>
+						<div th:if="${registro.observacion} !=' '" class="col col-1">
+						</div>
+						<div th:if="${registro.observacion} ==' '" class="col col-1">
+							<div class="row">
+								<div class="col col-12" th:text="${registro.resultado}"></div>
+
+							</div>
+						</div>
+						<div th:if="${registro.observacion} !=' '" class="col col-1">
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- </div> -->
+		</div>
+		<div class="card-footer small text-muted">Updated yesterday at
+			11:59 PM</div>
+
+	</div>
+	</main>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+	<script th:replace="registro/js/change :: javascript"></script>
+</body>
+</html>
